@@ -1,0 +1,76 @@
+
+
+/* screen sizing */
+@mixin mq($size){
+    @media only screen and (min-width: $size){
+        @content;
+    }
+}
+
+
+/* div formatting */
+
+@mixin flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexSpaced{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+
+/* Buttons */
+@mixin button{
+    @include flexCenter;
+    text-align: center;
+	margin:3px 5px;
+	cursor: pointer;
+	padding: 12px 15px;
+	border-radius: 8px;
+	font-size: 0.8rem;
+    min-width:160px;
+	min-height: 45px;
+	z-index: 50; 
+	border: 3px ridge LemonChiffon;
+}
+
+@mixin after($content: '', $pos:absolute){
+    position: relative;
+
+    &::after{
+        content: $content;
+        position: $pos;
+        @content;
+    }
+}
+
+@mixin hover-lift(){
+    transition: transform 350ms ease-in-out;
+    box-shadow: 0 .25em .5em 0 rgba(black, 0.2);
+
+   @include after(){
+       box-shadow: 0 0 .25em 0 rgba(black, 0.4);
+       opacity: 0;
+   }
+    &:hover,
+    &:focus{
+        transform: scale(1.05);
+
+        &::after{
+            opacity: 1;
+            
+        }
+    }
+}
+
+
+@media (min-width: 40em){
+    .split{
+        display: flex;
+        gap: 2em;
+    }
+}
